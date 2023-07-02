@@ -8,6 +8,9 @@ import verifyToken from '../jwt';
 const {A0Auth0} = NativeModules;
 
 const callbackUri = (domain, customScheme) => {
+  if (Platform.OS == 'windows') {
+    return A0Auth0.callbackUri
+  }
   const bundleIdentifier = A0Auth0.bundleIdentifier;
   const lowerCasedIdentifier = bundleIdentifier.toLowerCase();
   if (!customScheme && bundleIdentifier !== lowerCasedIdentifier) {

@@ -33,6 +33,7 @@ export default class Agent {
         resolve(event.url);
       };
       const params =
+        Platform.OS === 'windows' ? [] :
         Platform.OS === 'ios' ? [ephemeralSession, closeOnLoad] : [closeOnLoad];
       if (!skipLegacyListener) {
         eventURL = Linking.addEventListener('url', urlHandler);

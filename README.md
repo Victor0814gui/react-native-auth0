@@ -166,6 +166,23 @@ If you use a value other than `$(PRODUCT_BUNDLE_IDENTIFIER)` in the `CFBundleURL
 
 > For more info please read the [React Native docs](https://facebook.github.io/react-native/docs/linking.html).
 
+### Windows
+
+In this platform, the callback URI is calculated internally by UWP and is composed as:
+
+```text
+ms-app://{PACKAGE_SID}/
+```
+
+`PACKAGE_SID` represents the [Package SID](https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details#additional-values-for-package-family).
+
+It should look like this fully specified: `ms-app://s-1-15-2-3086575416-2154211046-1914954810-380264240-1103265468-394654818-2095687793/`.
+
+You can get the full URI by calling `WebAuthenticationBroker::GetCurrentApplicationCallbackUri()`.
+Alternatively put a breakpoint in `RNAuth0.cpp`, method `A0Auth0::GetConstantProvider` and copy the value from `callbackUri`.
+
+
+
 #### Expo
 
 > :warning: This SDK is not compatible with "Expo Go" app because of custom native code. It is compatible with Custom Dev Client and EAS builds
